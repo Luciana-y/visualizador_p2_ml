@@ -1,0 +1,17 @@
+# Entornos virtuales
+venv/
+
+# Archivos temporales
+*.pyc
+__pycache__/
+
+# Archivos grandes (si no quieres subirlos)
+*.pkl
+*.zip
+
+# Otros
+.DS_Store
+
+
+## Nada de pkls
+*.pkl
