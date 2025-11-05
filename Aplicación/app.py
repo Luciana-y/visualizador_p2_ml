@@ -33,8 +33,21 @@ def main():
                 show_movie_info(selected_movie)
 
             st.subheader("🎯 Películas similares")
-            genre_filter = st.sidebar.selectbox("Filtrar por género (opcional):", 
-                                                ["Ninguno"] + [g for g in movies_df.columns[5:] if merged_df[g].sum() > 0])
+            # Detectar columnas de géneros (asumiendo que empiezan desde la 6ta)
+            possible_genres = movies_df.columns[5:]
+
+            # Filtrar solo las que existen en merged_df
+            valid_genres = [g for g in possible_genres if g in merged_df.columns and merged_df[g].sum() > 0]
+
+            # Si no hay columnas válidas, solo mostrar "Ninguno"
+            if not valid_genres:
+                valid_genres = ["Ninguno"]
+
+            genre_filter = st.sidebar.selectbox(
+                "Filtrar por género (opcional):",
+                ["Ninguno"] + valid_genres
+            )
+
             if genre_filter == "Ninguno":
                 genre_filter = None
 
